@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?><packages version="1.3">
+  <package exploded="false" inWorkspace="true" name="eZoo.jar" todir="/eZoo" type="jar">
+    <properties>
+      <property name="org.jboss.ide.eclipse.as.core.packages.ModuleIDPropertyKey" value="149997607088450632778192781790031483"/>
+    </properties>
+  </package>
+  <package exploded="false" inWorkspace="true" name="eZoo-7-13-2017.jar" todir="/eZoo" type="jar">
+    <properties>
+      <property name="org.jboss.ide.eclipse.as.core.packages.ModuleIDPropertyKey" value="149999263503052289192737451490031483"/>
+    </properties>
+  </package>
+  <properties/>
+</packages>
