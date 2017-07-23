@@ -1,31 +1,12 @@
-	<%@ page isErrorPage="true" %>
-	<!-- Header content -->
-	<jsp:include page="header.jsp" />
-	
-	<!-- JSTL includes -->
-	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
-	<!-- Content for the body -->
-	<header>
-	  <div class="container">
-	
-		<%
-			//display message if present
-			out.println("<p class=\"alert alert-danger\">Something went wrong</p>");
-		%>
-		
-		<h1>eZoo <small>error page</small></h1>
-		<hr class="paw-primary">
-		<p>
-		  Your code threw an exception <i class="fa fa-frown-o fa-3"></i>
-		</p>
-	<%
-	  session.setAttribute("message", null);
-	  session.setAttribute("messageClass", null);
-	%>
-
-	  </div>
-	</header>
-
-	<!-- Additional Facilities -->
-	<jsp:include page="footer.jsp" />
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>Invalid Login Credentials!</h1>
+</body>
+</html>

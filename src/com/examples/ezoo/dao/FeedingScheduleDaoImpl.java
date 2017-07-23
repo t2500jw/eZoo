@@ -22,7 +22,7 @@ public class FeedingScheduleDaoImpl implements FeedingScheduleDAO {
 		int success = 0;
 		try {
 			connection = DAOUtilities.getConnection();			
-			String sql = "INSERT INTO public.\"Feeding_Schedules\" (\"time\", recurrence, food, notes) VALUES (?,?,?,?)";
+			String sql = "INSERT INTO public.\"FEEDING_SCHEDULES\" (\"time\", recurrence, food, notes) VALUES (?,?,?,?)";
 			
 			// Setup PreparedStatement
 			stmt = connection.prepareStatement(sql);						
@@ -62,14 +62,14 @@ public class FeedingScheduleDaoImpl implements FeedingScheduleDAO {
 		int success = 0;
 		try {
 			connection = DAOUtilities.getConnection();
-			String sql = "Update public.animals SET \"feedingSchedule\" = ? WHERE \"feedingSchedule\" = ?";
+			String sql = "Update public.\"ANIMALS\" SET \"feedingSchedule\" = ? WHERE \"feedingSchedule\" = ?";
 			stmt = connection.prepareStatement(sql);
 			stmt.setInt(1, 99);
 			stmt.setInt(2, id);
 			stmt.executeUpdate();
 			
 			
-			sql = "DELETE FROM \"Feeding_Schedules\" WHERE \"schedule_ID\" = ?";
+			sql = "DELETE FROM \"FEEDING_SCHEDULES\" WHERE \"schedule_ID\" = ?";
 			stmt = connection.prepareStatement(sql);
 			stmt.setInt(1, id);
 			stmt.executeUpdate();
@@ -91,7 +91,7 @@ public class FeedingScheduleDaoImpl implements FeedingScheduleDAO {
 		List<FeedingSchedule> schedules = new ArrayList<>();
 		try {
 			connection = DAOUtilities.getConnection();
-			String sql = "SELECT * FROM public.\"Feeding_Schedules\"";
+			String sql = "SELECT * FROM public.\"FEEDING_SCHEDULES\"";
 			stmt = connection.prepareStatement(sql);
 			ResultSet rs = stmt.executeQuery();
 			
@@ -123,12 +123,12 @@ public class FeedingScheduleDaoImpl implements FeedingScheduleDAO {
 		int sql1Result = 0;
 		try {
 			connection = DAOUtilities.getConnection();
-			String sql1 = "SELECT \"feedingSchedule\" FROM animals WHERE animalid = ?";				
+			String sql1 = "SELECT \"feedingSchedule\" FROM public.\"ANIMALS\" WHERE animalid = ?";				
 			stmt1 = connection.prepareStatement(sql1);
 			stmt1.setLong(1, animalID);
 			sql1Result = stmt1.executeUpdate();
 			
-			String sql2 = "SELECT * FROM \"Feeding_Schedules\" WHERE \"schedule_ID\" = " + sql1Result;
+			String sql2 = "SELECT * FROM \"FEEDING_SCHEDULES\" WHERE \"schedule_ID\" = " + sql1Result;
 			stmt2 = connection.prepareStatement(sql2);
 			ResultSet rs = stmt2.executeQuery();
 			
@@ -156,7 +156,7 @@ public class FeedingScheduleDaoImpl implements FeedingScheduleDAO {
 		try {
 			connection = DAOUtilities.getConnection();			
 			
-			sql = "UPDATE public.animals SET \"feedingSchedule\" = ? WHERE name = ?";
+			sql = "UPDATE public.\"ANIMALS\" SET \"feedingSchedule\" = ? WHERE name = ?";
 			stmt = connection.prepareStatement(sql);
 			stmt.setLong(1, feedingScheduleID);
 			stmt.setString(2, animalName);
@@ -188,7 +188,7 @@ public class FeedingScheduleDaoImpl implements FeedingScheduleDAO {
 		try {
 			connection = DAOUtilities.getConnection();			
 			
-			String sql = "UPDATE public.\"Feeding_Schedules\" SET recurrence=?, food=?, notes=?, \"time\"=? WHERE \"schedule_ID\" = ?";
+			String sql = "UPDATE public.\"FEEDING_SCHEDULES\" SET recurrence=?, food=?, notes=?, \"time\"=? WHERE \"schedule_ID\" = ?";
 			stmt = connection.prepareStatement(sql);
 			stmt.setInt(1, schedule.getRecurrence());
 			stmt.setString(2, schedule.getFood());
@@ -220,7 +220,7 @@ public class FeedingScheduleDaoImpl implements FeedingScheduleDAO {
 		try {
 			connection = DAOUtilities.getConnection();			
 			
-			String sql = "SELECT recurrence, food, notes, \"time\" FROM public.\"Feeding_Schedules\" WHERE \"schedule_ID\" = ?";
+			String sql = "SELECT recurrence, food, notes, \"time\" FROM public.\"FEEDING_SCHEDULES\" WHERE \"schedule_ID\" = ?";
 			stmt = connection.prepareStatement(sql);
 			stmt.setLong(1, scheduleID);			
 			

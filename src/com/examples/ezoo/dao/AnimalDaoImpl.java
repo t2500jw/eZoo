@@ -23,7 +23,7 @@ public class AnimalDaoImpl implements AnimalDAO {
 
 			stmt = connection.createStatement();
 
-			String sql = "SELECT * FROM ANIMALS";
+			String sql = "SELECT * FROM public.\"ANIMALS\"";
 
 			ResultSet rs = stmt.executeQuery(sql);
 
@@ -77,7 +77,7 @@ public class AnimalDaoImpl implements AnimalDAO {
 
 		try {
 			connection = DAOUtilities.getConnection();
-			String sql = "INSERT INTO ANIMALS VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+			String sql = "INSERT INTO public.\"ANIMALS\" VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
 			// Setup PreparedStatement
 			stmt = connection.prepareStatement(sql);

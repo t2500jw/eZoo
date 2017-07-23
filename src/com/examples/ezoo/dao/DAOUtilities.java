@@ -18,6 +18,7 @@ public class DAOUtilities {
 	
 	private static AnimalDaoImpl animalDaoImpl;
 	private static FeedingScheduleDaoImpl feedingScheduleDaoImpl;
+	private static UserDaoImpl userDaoImpl;
 	private static Connection connection;
 
 	public static synchronized AnimalDAO getAnimalDao() {
@@ -34,6 +35,14 @@ public class DAOUtilities {
 			feedingScheduleDaoImpl = new FeedingScheduleDaoImpl();
 		}
 		return feedingScheduleDaoImpl;
+	}
+	
+	public static synchronized UserDAO getUserDao() {
+		
+		if(userDaoImpl == null) {
+			userDaoImpl = new UserDaoImpl();
+		}
+		return userDaoImpl;
 	}
 
 	static synchronized Connection getConnection() throws SQLException {
