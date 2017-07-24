@@ -28,7 +28,7 @@
       <http-method>POST</http-method>
     </web-resource-collection>
     <auth-constraint>
-      <role-name>SuperUser</role-name>
+      <role-name>Employee</role-name>
     </auth-constraint>
   </security-constraint>
   <security-constraint>
@@ -39,22 +39,23 @@
       <http-method>POST</http-method>
     </web-resource-collection>
     <auth-constraint>
-      <role-name>StandardUser</role-name>
-      <role-name>SuperUser</role-name>
+      <role-name>Customer</role-name>
+      <role-name>Employee</role-name>
     </auth-constraint>
   </security-constraint>
   <security-constraint>
     <web-resource-collection>
       <web-resource-name>Create User Page</web-resource-name>
       <url-pattern>/register.jsp</url-pattern>
+      <url-pattern>/CreateNewUser</url-pattern>
       <http-method>GET</http-method>
       <http-method>POST</http-method>
     </web-resource-collection>
   </security-constraint>
   <security-role>
-    <role-name>SuperUser</role-name>
+    <role-name>Employee</role-name>
   </security-role>
   <security-role>
-    <role-name>StandardUser</role-name>
+    <role-name>Customer</role-name>
   </security-role>
 </web-app>

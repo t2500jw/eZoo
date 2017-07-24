@@ -15,7 +15,7 @@
 		Re-Enter Password: <input type="password" name="password2"><br />
 		<div class="form-group">
 		    <div class="col-sm-offset-4 col-sm-1">
-		      <button type="submit" class="btn btn-primary">Add</button>
+		      <button type="submit" class="btn btn-primary">Create User</button>
 		    </div>
 		  </div>
 	</form>

@@ -1,7 +1,7 @@
 package com.examples.ezoo.servlets;
 
 import java.io.IOException;
-import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,46 +10,59 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.examples.ezoo.dao.DAOUtilities;
+import com.examples.ezoo.dao.FeedingScheduleDAO;
 import com.examples.ezoo.dao.UserDAO;
+import com.examples.ezoo.model.FeedingSchedule;
+import com.examples.ezoo.model.Users;
+
 
 /**
- * Servlet implementation class CreateNewUSer
+ * Servlet implementation class DeleteFeedingScheduleServlet
  */
-@WebServlet("/CreateNewUser")
-public class CreateNewUser extends HttpServlet {
-	
+@WebServlet(description = "This servlet is the main interface into the deleting users", urlPatterns = { "/deleteUser" })
+public class DeleteUserServlet extends HttpServlet {
+
 	private static final long serialVersionUID = 1L;
-       
-	
+
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("register.jsp").forward(request, response);
+
+		//Grab users from database
+		UserDAO dao = DAOUtilities.getUserDao();
+		List<Users> users = dao.getUsers();
+
+		// Populate the list into a variable that will be stored in the session
+		request.getSession().setAttribute("users", users);				
+		
+		request.getRequestDispatcher("/admin/deleteUser.jsp").forward(request, response);
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//Get Parameters		
+		//Get Parameters
+		
 		String username = request.getParameter("username");
-		String password1 = request.getParameter("password1");
-		String password2 = request.getParameter("password2");		
 		
 		//Call DAO method		
 		UserDAO dao = DAOUtilities.getUserDao();
-		try { 
-			String responseMessage = dao.createUserAccount(username, password1, password2);
-			System.out.println(responseMessage);
-			request.getSession().setAttribute("message", "User successfully created");
+		try {
+			dao.deleteUserAccount(username);
+			request.getSession().setAttribute("message", "Deleted user successfully!");
 			request.getSession().setAttribute("messageClass", "alert-success");
-			response.sendRedirect("login.jsp");
+			response.sendRedirect("deleteUser");
+
 		}catch (Exception e){
 			e.printStackTrace();
 			
 			//change the message
 			request.getSession().setAttribute("message", "There was a problem creating the feeding schedule at this time");
-			request.getSession().setAttribute("messageClass", "alert-danger");			
-			request.getRequestDispatcher("register.jsp").forward(request, response);
+			request.getSession().setAttribute("messageClass", "alert-danger");
+			
+			request.getRequestDispatcher("/admin/deleteUser.jsp").forward(request, response);
 
 		}
 	}
+
+
 
 }
