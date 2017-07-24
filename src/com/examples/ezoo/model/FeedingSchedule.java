@@ -1,7 +1,12 @@
 package com.examples.ezoo.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class FeedingSchedule {
 	
+	@Id	
 	private long schedule_ID = 0L;
 	private String time = ""; 
 	private int recurrence = 0;

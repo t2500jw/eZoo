@@ -22,39 +22,51 @@
  
 		<h1>eZoo <small>Change User Roles</small></h1>
 		<hr class="paw-primary">
+		<h2>Change to customer role</h2>
 		<form action="changeUserRole" method="post">
-		<table class="table table-striped table-hover table-responsive ezoo-datatable">
+		<table class="table table-striped table-hover table-responsive ezoo-datatable" id="changeRoleToCustomer">
 			<thead>
-				<tr>
-					<th class="text-center">Alter</th>
+				<tr>					
 					<th class="text-center">User</th>
 					<th class="text-center">Current Role</th>	
-					<th class="text-center">New Role</th>					
+					<th class="text-center">Change</th>								
 				</tr>
 			</thead>			
 			<tbody>
 				<c:forEach var="userRoles" items="${users}">				
-					<tr>
-						<td class="alter"><input type="checkbox"/></td>
+					<tr>						
 						<td class="username"><c:out value="${userRoles.username}" /></td>
 						<td class="role"><c:out value="${userRoles.role}" /></td>
-						<td class="newRole">
-						<select required="required" name="userRole" class="form-control" >
-							<option value="Customer">
-								Customer
-							</option>
-							<option value="Employee">
-								Employee
-							</option>						
-						</select>							
-						</td>						
-						<!--  <td align="center"><form><input type=submit value="${schedules.schedule_ID}" style="width:100%"></form></td>	-->
-						<!-- <td align="center"><button type="Submit" name="name" value="${userRole.username}">Assign</button>	 -->				
+						<!--  <td><input type="submit" value="Change Checked User Roles"/></td>-->						
+						<td align="center"><button type="Submit" name="newRoll" value="${userRoles.username},Customer">Change To Customer Role</button></td>				
 					</tr>					
 				</c:forEach>
 			</tbody>
-		</table>
-						<input type="submit" value="Change Checked User Roles"/>
+		</table>						
+		</form>		
+		<br />
+		<br />
+		<h2>Change to employee role</h2>
+		<form action="changeUserRole" method="post">
+		<table class="table table-striped table-hover table-responsive ezoo-datatable" id="changeRoleToCustomer">
+			<thead>
+				<tr>					
+					<th class="text-center">User</th>
+					<th class="text-center">Current Role</th>	
+					<th class="text-center">Change</th>								
+				</tr>
+			</thead>			
+			<tbody>
+				<c:forEach var="userRoles" items="${users}">				
+					<tr>						
+						<td class="username"><c:out value="${userRoles.username}" /></td>
+						<td class="role"><c:out value="${userRoles.role}" /></td>
+						<!--  <td><input type="submit" value="Change Checked User Roles"/></td>-->						
+						<td align="center"><button type="Submit" name="newRoll" value="${userRoles.username},Employee">Change To Employee Role</button></td>				
+					</tr>					
+				</c:forEach>
+			</tbody>
+		</table>						
 		</form>		
 	  </div>
 	</header>
@@ -64,7 +76,7 @@
     $(document).ready(function () { //launch this code after the whole DOM is loaded
         $("form").submit(function (event) { // function to process submitted table
                     var tableData = []; // we will store rows' data into this array
-                    $("#adminTable") // select table by id
+                    $("#changeRole") // select table by id
                             .find(".tableRow") // select rows by class
                             .has(":checked") // select only rows with checked checkboxes
                             .each(function () { // for each selected row extract data               

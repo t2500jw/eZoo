@@ -38,14 +38,14 @@ public class CreateNewUser extends HttpServlet {
 		try { 
 			String responseMessage = dao.createUserAccount(username, password1, password2);
 			System.out.println(responseMessage);
-			request.getSession().setAttribute("message", "User successfully created");
+			request.getSession().setAttribute("message", "User successfully created!");
 			request.getSession().setAttribute("messageClass", "alert-success");
 			response.sendRedirect("login.jsp");
 		}catch (Exception e){
 			e.printStackTrace();
 			
 			//change the message
-			request.getSession().setAttribute("message", "There was a problem creating the feeding schedule at this time");
+			request.getSession().setAttribute("message", "There was a problem creating the new user!");
 			request.getSession().setAttribute("messageClass", "alert-danger");			
 			request.getRequestDispatcher("register.jsp").forward(request, response);
 

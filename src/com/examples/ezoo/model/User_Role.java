@@ -1,8 +1,18 @@
 package com.examples.ezoo.model;
 
-public class User_Role {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="user_role", schema="public")
+public class User_Role {	
 	
+	@Id
+	@Column(name="username")
 	String username = "";
+	@Column(name="role")
 	String role = "";
 	
 	public User_Role() {

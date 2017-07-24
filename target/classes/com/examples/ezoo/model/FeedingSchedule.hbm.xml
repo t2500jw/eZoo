@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 24, 2017 5:18:58 PM by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.examples.ezoo.model.FeedingSchedule" table="FEEDINGSCHEDULE">
+        <id name="schedule_ID" type="long">
+            <column name="SCHEDULE_ID" />
+            <generator class="assigned" />
+        </id>
+        <property name="time" type="java.lang.String">
+            <column name="TIME" />
+        </property>
+        <property name="recurrence" type="int">
+            <column name="RECURRENCE" />
+        </property>
+        <property name="food" type="java.lang.String">
+            <column name="FOOD" />
+        </property>
+        <property name="notes" type="java.lang.String">
+            <column name="NOTES" />
+        </property>
+    </class>
+</hibernate-mapping>

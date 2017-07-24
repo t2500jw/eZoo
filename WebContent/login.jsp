@@ -20,16 +20,13 @@
 	</c:when>
 	</c:choose>
  
-	<h2>Login:</h2>
-	<h3></h3>
+	<h2>Login:</h2>	
 	<form method="POST" action="j_security_check">
 		Username: <input type="text" name="j_username" value="" ><br/>
 		Password: <input type="password" name="j_password"><br />
 		<input type="submit" value="Login">
-	</form>
-	<br/>
-	<br/>
-	<a href="/eZoo/register.jsp">Create a new account</a>
+	</form>	
+	<h3><a href="/eZoo/register.jsp">Create a new account</a></h3>
 	</div>
 	</header>	
 	

@@ -81,7 +81,8 @@
                     </li>
                     <li class="dropdown">
                         <a tabindex="-1" href="#" class="dropdown-toggle" data-toggle="dropdown">User Management<b class="caret"></b></a>
-                        <ul class="dropdown-menu">                          
+                        <ul class="dropdown-menu">   
+                          <li><a href="/eZoo/register.jsp">Create a New Account</a></li>                       
                           <li><a href="changePassword">Change Password</a></li>
                           <li><a href="deleteUser">Delete User</a></li>
                           <li><a href="changeUserRole">Change User Role</a></li>

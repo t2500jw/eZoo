@@ -7,7 +7,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.examples.ezoo.model.FeedingSchedule;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistry;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.cfg.Configuration;
+
+import com.examples.ezoo.model.User_Role;
 import com.examples.ezoo.model.Users;
 
 
@@ -16,6 +23,9 @@ public class UserDaoImpl implements UserDAO {
 
 	@Override
 	public String createUserAccount(String username, String password1, String password2) {
+		
+		StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure().build();
+		SessionFactory sessionFactory = null;
 		
 		if(!password1.equals(password2)) {
 			return "Passwords do not match!";
@@ -30,10 +40,11 @@ public class UserDaoImpl implements UserDAO {
 			return "Password must have at least 2 numeric characters!";
 		}
 		
-		Connection connection = null;
-		PreparedStatement stmt = null;
+		//Connection connection = null;
+		//PreparedStatement stmt = null;
 		
 		try {
+			/*
 			connection = DAOUtilities.getConnection();
 			String sql = "INSERT INTO public.\"USERS\"(\"Username\",\"Password\") VALUES (?, ?)";
 			stmt = connection.prepareStatement(sql);
@@ -46,15 +57,34 @@ public class UserDaoImpl implements UserDAO {
 			stmt.setString(1, username);
 			stmt.setString(2, "Customer");
 			success = stmt.executeUpdate();
+			*/
+			Configuration configuration = new Configuration();
+			configuration.addAnnotatedClass(Users.class);
+			sessionFactory = new MetadataSources( registry ).buildMetadata().buildSessionFactory();	
 			
-			return "User created successfully!";
 			
 			
-		} catch (SQLException e) {			
+		} catch (Exception e) {			
 			e.printStackTrace();
+			StandardServiceRegistryBuilder.destroy(registry);
 			return "There was a problem creating the user!";
-		}		
+		}	
 		
+		//Create user in users table
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		session.save(new Users(username, password1));
+		session.getTransaction().commit();
+		session.close();
+		
+		//Create user in user_role table
+		session = sessionFactory.openSession();
+		session.beginTransaction();
+		session.save(new User_Role(username, "Customer"));
+		session.getTransaction().commit();
+		session.close();
+		
+		return "Created new user!";
 		
 	}
 

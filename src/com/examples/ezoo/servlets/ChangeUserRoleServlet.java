@@ -2,8 +2,6 @@ package com.examples.ezoo.servlets;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -47,17 +45,11 @@ public class ChangeUserRoleServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		Map<String, String[]> tableData = request.getParameterMap();
-		String[] idsToUpdate = tableData.get("selectedIds");
-		for (String id : idsToUpdate){
-		    String kwdParamName = "kwd"+id;
-		    String kwd = tableData.get(kwdParamName)[0];
-		}
 		
-		
-		String[] users = request.getParameterValues("userRoles");
-		String username = request.getParameter("name");	
-		String role = request.getParameter("role");
+		@SuppressWarnings("unused")
+		String[] data = request.getParameter("newRoll").split(",");
+		String username = data[0];
+		String role = data[1];
 		
 		
 		//Call DAO method		
@@ -65,7 +57,7 @@ public class ChangeUserRoleServlet extends HttpServlet {
 		try {
 			boolean result = dao.SetUserRole(username, role);
 			//request.getSession().setAttribute("message", "Feeding Schedule successfully assigned");
-			request.getSession().setAttribute("message", result + " rows affected");
+			request.getSession().setAttribute("message", "User Role Updated Successfully!");
 			request.getSession().setAttribute("messageClass", "alert-success");
 			response.sendRedirect("changeUserRole");			
 
@@ -74,10 +66,10 @@ public class ChangeUserRoleServlet extends HttpServlet {
 			e.printStackTrace();
 			
 			//change the message
-			request.getSession().setAttribute("message", "There was a problem assigning the feeding schedule at this time");
+			request.getSession().setAttribute("message", "There was a problem assigning the role to the user!");
 			request.getSession().setAttribute("messageClass", "alert-danger");
 			
-			request.getRequestDispatcher("assignFeedingSchedule.jsp").forward(request, response);
+			request.getRequestDispatcher("changeUserRole.jsp").forward(request, response);
 
 		}
 	}

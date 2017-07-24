@@ -40,8 +40,24 @@ public class UserRoleDaoImpl implements UserRoleDAO {
 
 	@Override
 	public boolean SetUserRole(String username, String role) {
-		// TODO Auto-generated method stub
-		return false;
+		
+		Connection connection = null;
+		PreparedStatement stmt = null;		
+		try {
+			connection = DAOUtilities.getConnection();
+			String sql = "UPDATE public.\"USER_ROLE\" SET role = ?, username = ? WHERE username = ?";
+			stmt = connection.prepareStatement(sql);
+			stmt.setString(1, role);
+			stmt.setString(2, username);
+			stmt.setString(3, username);
+			stmt.executeQuery();
+			
+			return true;
+			
+		} catch (SQLException e) {			
+			e.printStackTrace();
+			return false;
+		}		
 	}
 	
 }
